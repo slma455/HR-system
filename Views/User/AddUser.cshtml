@@ -1,0 +1,126 @@
+﻿@model HrProject.ViewModels.UserViewModel
+
+@{
+	ViewData["Title"] = "AddUser";
+	SelectList groupList = new SelectList(ViewBag.groupRoles);
+}
+@*---------------------Test Layout------------------------------*@
+
+<div class="content-wrapper">
+	<div class="container-xxl flex-grow-1 container-p-y">
+		<h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Forms/</span> Add New User</h4>
+		<div class="col-xxl">
+			<div class="card mb-4">
+				<div class="card-header d-flex align-items-center justify-content-between">
+					<h5 class="mb-0">Required Data</h5>
+				</div>
+				<div class="card-body">
+					<form asp-action="AddUser">
+					<div asp-validation-summary="All" class="text-danger"></div>
+						<div class="row mb-3">
+							<label class="col-sm-2 col-form-label" for="basic-icon-default-fullname">Name</label>
+							<div class="col-sm-10">
+								<div class="input-group input-group-merge">
+									<span id="basic-icon-default-fullname2" class="input-group-text">
+										<i class="bx bx-user"></i>
+									</span>
+									<input asp-for="Name" type="text"
+										   class="form-control"
+										   id="basic-icon-default-fullname"
+										   placeholder="Enter Full Name..."
+										   aria-describedby="basic-icon-default-fullname2" />
+								</div>
+								<span asp-validation-for="Name" class="text-danger"></span>
+							</div>
+						</div>
+						<div class="row mb-3">
+							<label class="col-sm-2 col-form-label" for="basic-icon-default-company">Uesr Name</label>
+							<div class="col-sm-10">
+								<div class="input-group input-group-merge">
+									<span id="basic-icon-default-company2" class="input-group-text">
+										<i class="bx bx-user"></i>
+									</span>
+									<input asp-for="UserName" type="text"
+										   id="basic-icon-default-company"
+										   class="form-control"
+										   placeholder="Enter User Name..."
+										   aria-describedby="basic-icon-default-company2" />
+								</div>
+								<span asp-validation-for="UserName" class="text-danger"></span>
+
+							</div>
+						</div>
+						<div class="row mb-3">
+							<label class="col-sm-2 col-form-label" for="basic-icon-default-email">Email</label>
+							<div class="col-sm-10">
+								<div class="input-group input-group-merge">
+									<span class="input-group-text"><i class="bx bx-envelope"></i></span>
+									<input asp-for="Email" type="email"
+										   id="basic-icon-default-email"
+										   class="form-control"
+										   placeholder="user@example.com"
+										   aria-describedby="basic-icon-default-email2" />
+								</div>
+								<span asp-validation-for="Email" class="text-danger"></span>
+							</div>
+						</div>
+						<div class="row mb-3">
+							<label class="col-sm-2 col-form-label" for="basic-icon-default-email">Password</label>
+							<div class="col-sm-10">
+								<div class="input-group input-group-merge">
+									<span class="input-group-text"><i class="bx bxs-compass"></i></span>
+									<input asp-for="Password"
+										   id="basic-icon-default-email"
+										   class="form-control"
+										   placeholder="Complex Password..."
+										   aria-describedby="basic-icon-default-email2" />
+								</div>
+								<span asp-validation-for="Password" class="text-danger"></span>
+							</div>
+						</div>
+						<div class="row mb-3">
+							<label class="col-sm-2 col-form-label" for="basic-icon-default-email">ConfirmPassword</label>
+							<div class="col-sm-10">
+								<div class="input-group input-group-merge">
+									<span class="input-group-text"><i class="bx bxs-compass"></i></span>
+									<input asp-for="ConfirmPassword"
+										   id="basic-icon-default-email"
+										   class="form-control"
+										   placeholder="Complex Password..."
+										   aria-describedby="basic-icon-default-email2" />
+								</div>
+								<span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+							</div>
+						</div>
+						<div class="row mb-3">
+							<label class="col-sm-2 form-label" for="basic-icon-default-phone">Group Name</label>
+							<div class="col-sm-10">
+								<div class="input-group input-group-merge">
+									<span id="basic-icon-default-phone2" class="input-group-text">
+										<i class="bx bx-building"></i>
+									</span>
+									<select asp-for="GroupName" class="form-control" asp-items="groupList">
+										<option value="">Select Group Name...</option>
+									</select>
+								</div>
+								<span asp-validation-for="GroupName" class="text-danger"></span>
+							</div>
+						</div>
+						<div class="float-end demo-inline-spacing">
+							<div class="btn-group">
+								<button type="submit" value="Save" class="btn btn-primary me-3"><i class="bi bi-person-fill-add"></i> Add</button>
+								<a class="btn btn-outline-danger" asp-action="Index"> <i class="bi bi-x-circle"> Cancel</i></a>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+@section Scripts {
+	<script src="/lib/jquery/dist/jquery.min.js"></script>
+	<script src="/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+	<script src="/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}

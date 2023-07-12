@@ -1,0 +1,152 @@
+﻿@model HrProject.ViewModels.EmployeeViewModel
+
+@{
+	ViewData["Title"] = "Create";
+	//SelectList groupList = new SelectList(ViewBag.groupRoles);
+}
+@*---------------------Test Layout------------------------------*@
+
+<div class="content-wrapper">
+	<div class="container-xxl flex-grow-1 container-p-y">
+		<h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"> Add New Employee</h4>
+		<div class="col-xxl">
+			<div class="card mb-4">
+				<div class="card-header d-flex align-items-center justify-content-between">
+					<h5 class="mb-0">Required Data</h5>
+				</div>
+				<div class="card-body">
+                    <form asp-action="Create" onsubmit="return validateForm()">
+                        <div class="form-group">
+                            <label asp-for="FirstName" class="control-label"></label>
+                            <input asp-for="FirstName" class="form-control" />
+                            <span asp-validation-for="FirstName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="LastName" class="control-label"></label>
+                            <input asp-for="LastName" class="form-control" />
+                            <span asp-validation-for="LastName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Country" class="control-label"></label>
+                            <input asp-for="Country" class="form-control" />
+                            <span asp-validation-for="Country" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="City" class="control-label"></label>
+                            <input asp-for="City" class="form-control"/>
+                            @*@Html.DropDownList("Cities", null, "-- Select City --", new { @class = "form-control" })*@
+                            <span asp-validation-for="City" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Phone" class="control-label"></label>
+                            <input asp-for="Phone" class="form-control" />
+                            <span asp-validation-for="Phone" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Gender" class="control-label"></label>
+                            @Html.DropDownList("Gender", new SelectList(new[] { "male", "female" }), "-- Select Gender --", new { @class = "form-control" })
+                            <span asp-validation-for="Gender" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Nationality" class="control-label"></label>
+                            <input asp-for="Nationality" class="form-control" />
+                            <span asp-validation-for="Nationality" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="NationalId" class="control-label"></label>
+                            <input asp-for="NationalId" class="form-control" />
+                            <span asp-validation-for="NationalId" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Salary" class="control-label"></label>
+                            <input asp-for="Salary" class="form-control" />
+                            <span asp-validation-for="Salary" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="HireDate" class="control-label"></label>
+                            <input asp-for="HireDate" class="form-control" type="date" />
+                            <span asp-validation-for="HireDate" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="BirthDate" class="control-label"></label>
+                            <input asp-for="BirthDate" class="form-control" type="date" />
+                            <span asp-validation-for="BirthDate" class="text-danger"></span>
+
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="ArrivalTime" class="control-label"></label>
+                            <input asp-for="ArrivalTime" class="form-control" type="time"/>
+                            <span asp-validation-for="ArrivalTime" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="LeaveTime" class="control-label"></label>
+                            <input asp-for="LeaveTime" class="form-control" type="time" />
+                            <span asp-validation-for="LeaveTime" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Department" class="control-label"></label>
+                            @Html.DropDownList("DepartmentList", null, "-- Select Department --", new { @class = "form-control" })
+                            <span asp-validation-for="Department" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mt-3">
+                            <div class="row float-end">
+                                <div class="col-sm-6 text-end">
+                                    <button type="submit" class="btn btn-primary"><i class="bi bi-person-fill-add"></i></button>
+                                </div>
+                                <div class="col-sm-6">
+                                    <a asp-action="Index" class="btn btn-danger"><i class="bi bi-x-octagon-fill"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+@section Scripts {
+	<script src="/lib/jquery/dist/jquery.min.js"></script>
+	<script src="/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+	<script src="/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#salaryReport").dataTable();
+        })
+
+        function validateForm() {
+            var birthDate = document.getElementById('BirthDate').value;
+            var hireDate = document.getElementById('HireDate').value;
+
+            // Validate BirthDate
+            var birthDateObj = new Date(birthDate);
+            var currentDate = new Date();
+            var minimumBirthDate = new Date(currentDate.getFullYear() - 20, currentDate.getMonth(), currentDate.getDate());
+
+            if (birthDateObj > minimumBirthDate) {
+                alert('You must be at least 20 years old.');
+                return false; // Prevent form submission
+            }
+
+            // Validate HireDate
+            var hireDateObj = new Date(hireDate);
+            var minimumHireDate = new Date(2008, 0, 1); // Minimum hire date: January 1, 2008
+
+            if (hireDateObj < minimumHireDate) {
+                alert('Please select a hire date after 2008.');
+                return false; // Prevent form submission
+            }
+
+            return true; // Allow form submission
+        }
+    </script>
+}
+
+    <style>
+        label.control-label {
+            color: black;
+        }
+    </style>

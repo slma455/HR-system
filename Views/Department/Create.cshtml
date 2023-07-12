@@ -1,0 +1,52 @@
+﻿@model HrProject.ViewModels.DepartmentViewModel
+
+@{
+	ViewData["Title"] = "Create";
+	//SelectList groupList = new SelectList(ViewBag.groupRoles);
+}
+@*---------------------Test Layout------------------------------*@
+
+<div class="content-wrapper">
+	<div class="container-xxl flex-grow-1 container-p-y">
+		<h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"> Add New Department</h4>
+		<div class="col-xxl">
+			<div class="card mb-4">
+				<div class="card-header d-flex align-items-center justify-content-between">
+					<h5 class="mb-0">Required Data</h5>
+				</div>
+				<div class="card-body">
+                    <form asp-action="Create" onsubmit="return validateForm()">
+                        
+                        <div class="form-group">
+                            <label asp-for="DeptName" class="control-label"></label>
+                            <input asp-for="DeptName" class="form-control" />                            <span asp-validation-for="DeptName" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mt-3">
+                            <div class="row float-end">
+                                <div class="col-sm-6 text-end">
+                                    <button type="submit" class="btn btn-primary"><i class="bi bi-building-fill"></i> </button>
+                                </div>
+                                <div class="col-sm-6">
+                                    <a asp-action="Index" class="btn btn-danger"><i class="bi bi-x-octagon-fill"></i> </a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+@section Scripts {
+	<script src="/lib/jquery/dist/jquery.min.js"></script>
+	<script src="/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+	<script src="/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}
+
+    <style>
+        label.control-label {
+            color: black;
+        }
+    </style>

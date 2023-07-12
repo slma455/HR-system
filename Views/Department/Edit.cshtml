@@ -1,0 +1,81 @@
+﻿@model HrProject.ViewModels.DepartmentViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<hr />
+<div class="content-wrapper">
+    <div class="container-xxl flex-grow-1 container-p-y ">
+        <div class="col-xxl ">
+            <div class="card mb-5">
+                <h4 class="fw-bold py-3 ps-4 pt-4"><span class="text-muted fw-light">Edit/</span> Department</h4>
+                <div class="card-header d-flex align-items-center justify-content-between">
+                    <h5 class="mb-0">Required Data</h5>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Edit" onsubmit="return validateForm()">
+                        
+                        <div class="form-group mt-3 ">
+                            <label asp-for="DeptName" class="form-control pb-2 pt-2"></label>
+                            <input asp-for="DeptName" class="form-control" />
+                        </div>
+                        <div class="float-end demo-inline-spacing pb-2 pt-2">
+                            <div class="btn-group">
+                                <button type="submit" value="Edit" class="btn btn-primary me-3"><i class="bi bi-pencil-square"></i></button>
+                                <a class="btn btn-outline-danger me-3" asp-action="Index"> <i class="bi bi-x-circle"></i></a>
+
+                                <a asp-action="Index" class="btn btn-success me-3">
+                                    <i class="bi bi-arrow-return-left"></i>
+                                        Back to List</a>
+                                
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    <script src="/lib/jquery/dist/jquery.min.js"></script>
+    <script src="/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script>
+
+        function validateForm() {
+            var birthDate = document.getElementById('BirthDate').value;
+            var hireDate = document.getElementById('HireDate').value;
+
+            // Validate BirthDate
+            var birthDateObj = new Date(birthDate);
+            var currentDate = new Date();
+            var minimumBirthDate = new Date(currentDate.getFullYear() - 20, currentDate.getMonth(), currentDate.getDate());
+
+            if (birthDateObj > minimumBirthDate) {
+                alert('You must be at least 20 years old.');
+                return false; // Prevent form submission
+            }
+
+            // Validate HireDate
+            var hireDateObj = new Date(hireDate);
+            var minimumHireDate = new Date(2010, 0, 1); // Minimum hire date: January 1, 2010
+
+            if (hireDateObj < minimumHireDate) {
+                alert('Please select a hire date after 2010.');
+                return false; // Prevent form submission
+            }
+
+            return true; // Allow form submission
+        }
+    </script>
+}
+
+<style>
+    label.control-label {
+        color: black;
+    }
+</style>

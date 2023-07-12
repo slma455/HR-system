@@ -1,0 +1,49 @@
+﻿@model List<HrProject.Models.Attendance>
+
+@{
+    ViewData["Title"] = "index";
+}
+
+<h1>index</h1>
+
+<p>
+    <a asp-action="createArrive" class="btn btn-primary align-content-center text-warning ">Arrive</a>
+   
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+               ArrivalTime
+            </th>
+            <th>
+                DepartureTime
+            </th>
+            <th>
+               Employee
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ArrivalTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DepartureTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Employee.FirstName)
+            </td>
+            <td>
+
+                    @Html.ActionLink("Details", "details", new { id=item.Id },new { @class = "btn btn-dark text-warning" })
+                    @Html.ActionLink("Delete", "Delete", new { id=item.Id },new { @class = "btn btn-danger text-warning" })
+                    @Html.ActionLink("Leave", "createLeave", new { id=item.Id},new { @class = "btn btn-primary text-warning" })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

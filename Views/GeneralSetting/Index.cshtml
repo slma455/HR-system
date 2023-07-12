@@ -1,0 +1,84 @@
+﻿@model GeneralSettingViewModel
+@{
+	ViewData["Title"] = "Index";
+}
+
+<div class="content-wrapper">
+	<div class="container-xxl flex-grow-1 container-p-y">
+		<h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Forms/</span> General Settings</h4>
+		<div class="col-xxl">
+			<div class="card mb-4">
+				<div class="card-header d-flex align-items-center justify-content-between">
+					<h5 class="mb-0">Required Data</h5>
+					<div asp-validation-summary="All"></div>
+				</div>
+				<div class="card-body">
+					<form asp-action="Save">
+						<div class="row mb-3">
+							<label class="col-sm-2 col-form-label" for="basic-icon-default-fullname">Bouns</label>
+							<div class="col-sm-10">
+								<div class="input-group input-group-merge">
+									<span id="basic-icon-default-fullname2" class="input-group-text">
+										<i class="bx bxl-bitcoin"></i>
+									</span>
+									<input asp-for="Extra" type="text"
+										   class="form-control"
+										   id="basic-icon-default-fullname"
+										   placeholder="Enter Bouns Price Per Hour..."
+										   aria-describedby="basic-icon-default-fullname2" />
+								</div>
+								<span asp-validation-for="Extra" class="text-danger"></span>
+							</div>
+						</div>
+						<div class="row mb-3">
+							<label class="col-sm-2 col-form-label" for="basic-icon-default-company">Discount</label>
+							<div class="col-sm-10">
+								<div class="input-group input-group-merge">
+									<span id="basic-icon-default-company2" class="input-group-text">
+										<i class="bx bxl-bitcoin"></i>
+									</span>
+									<input asp-for="Discount" type="text"
+										   id="basic-icon-default-company"
+										   class="form-control"
+										   placeholder="Enter Discount Price Per Hour..."
+										   aria-describedby="basic-icon-default-company2" />
+								</div>
+								<span asp-validation-for="Discount" class="text-danger"></span>
+							</div>
+						</div>
+
+						<div class="row mb-3">
+							<label class="col-sm-2 col-form-label" for="basic-icon-default-company">Weekly Holidays</label>
+							<div class="col-lg-6">
+								<div class="demo-inline-spacing mt-3">
+									<div class="list-group">
+										@for (int i = 0; i < Model.DayChecked.Count(); i++)
+										{
+											<label class="list-group-item text-black">
+												<input class="form-check-input me-1" type="hidden" asp-for="@Model.DayChecked[i].Day" />
+												<input class="form-check-input me-1" asp-for="@Model.DayChecked[i].Checked" />
+												@Model.DayChecked[i].Day
+											</label>
+										}
+									</div>
+									<span asp-validation-for="DayChecked" class="text-danger"></span>
+								</div>
+							</div>
+						</div>
+
+						<div class="float-end demo-inline-spacing">
+							<div class="btn-group">
+								<button type="submit" value="Save" class="btn btn-primary me-3">Save</button>
+								<a class="btn btn-outline-danger" asp-action="Index"> <i class="bi bi-x-circle"></i> Cancel</a>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+@section Scripts{
+	<partial name="_ValidationScriptsPartial" />
+}

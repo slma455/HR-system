@@ -1,0 +1,48 @@
+﻿@model HrProject.Models.Attendance
+
+@{
+    ViewData["Title"] = "search";
+}
+
+<h1>search</h1>
+
+
+    <h4>Attendance</h4>
+    <hr />
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    ArrivalTime
+                </th>
+                <th>
+                    DepartureTime
+                </th>
+                <th>
+                    Employee
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+          
+                <tr>
+                    <td>
+                       @Model.ArrivalTime
+                    </td>
+                    <td>
+                       @Model.DepartureTime
+                    </td>
+                    <td>
+                        @Model.Employee.FirstName
+                    </td>
+                    <td>
+
+                        @Html.ActionLink("Details", "details", new { id=Model.Id },new { @class = "btn btn-dark text-warning" })
+                        @Html.ActionLink("Delete", "Delete", new { id=Model.Id },new { @class = "btn btn-danger text-warning" })
+                        @Html.ActionLink("Leave", "createLeave", new { id=Model.Id},new { @class = "btn btn-primary text-warning" })
+                    </td>
+                </tr>
+            
+        </tbody>
+    </table>

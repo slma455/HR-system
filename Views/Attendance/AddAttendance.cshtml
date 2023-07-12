@@ -1,0 +1,83 @@
+﻿@model AttendanceViewModel
+@{
+	SelectList empList = new SelectList(ViewBag.Employees, "Id", "FirstName");
+}
+
+<div class="card-body">
+	<div class="px-3">
+		@*<div asp-validation-summary=All class="text-danger"></div>*@
+		<form class="form form-horizontal" asp-action="AddAttendance" asp-route-id="@Model.EmpId">
+			<div class="form-body">
+				<div class="form-group row">
+					<label class="col-md-3 label-control text-black" for="projectinput7">Employee Name </label>
+					<div class="col-md-9">
+						<select asp-for="EmpId" asp-items="empList" class="form-control" required>
+							<option value="">--- Select Employee ---</option>
+						</select>
+					</div>
+					<span asp-validation-for="EmpId" class="text-danger text-center"></span>
+				</div>
+				<div class="form-group row mt-2">
+					<label class="col-md-3 label-control text-black" for="projectinput9">Date </label>
+					<div class="col-md-9">
+						<div class="position-relative has-icon-left">
+							<input type="date"  class="form-control" asp-for="Date">
+							<div class="form-control-position">
+								<i class="ft-message-square"></i>
+							</div>
+						</div>
+						<span asp-validation-for="Date" class="text-danger"></span>
+					</div>
+				</div>
+			</div>
+			<div class=" row">
+				<div class="col-md-12">
+					<div class=" row form-group mt-2">
+						<label class="col-md-3 label-control text-black">Arrival time </label>
+						<div class="position-relative has-icon-left col-lg-9">
+							<input type="time" asp-for="ArrivalTime" class="form-control">
+							<div class="form-control-position">
+								<i class="ft-clock"></i>
+							</div>
+						</div>
+						<span asp-validation-for="ArrivalTime" class="text-danger text-center"></span>
+					</div>
+				</div>
+				<div class="col-md-12">
+					<div class=" row form-group mt-2">
+						<label class="col-md-3 label-control text-black">Leave time </label>
+						<div class="position-relative has-icon-left col-lg-9">
+							<input type="time" asp-for="DepartureTime" class="form-control">
+							<div class="form-control-position">
+								<i class="ft-clock"></i>
+							</div>
+						</div>
+						<span asp-validation-for="DepartureTime" class="text-danger text-center"></span>
+					</div>
+				</div>
+			</div>
+			<div class="form-actions float-end mt-3">
+
+				<button type="submit" class="btn btn-success">
+					<i class="bi bi-save"></i> Save
+				</button>
+			</div>
+		</form>
+	</div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+@section Scripts {
+	<partial name="_ValidationScriptsPartial" />
+
+	<script>
+		function confirmDelete() {
+			var confirmMsg = confirm("Are you sure you want to Delete this User?1");
+			if (!confirmMsg) {
+				event.preventDefault();
+			}
+
+		}
+	</script>
+}
